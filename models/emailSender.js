@@ -15,7 +15,7 @@ let transporter = nodemailer.createTransport({
 function sendEmail(message) {
   transporter.sendMail(message, (err, info) => {
     if (err) {
-      console.log(`Error while sending an email ${err}`);
+      console.log(`Error while sending an email: ${err}`);
     }
     console.log('info ', info);
   });
