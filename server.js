@@ -1,13 +1,18 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
-require('dotenv').config();
+const cors = require('cors');
 const {
   sendEmailOrderReceivedTo,
   sendEmailOrderConfirmedTo,
 } = require('./models/emailSender');
+
 const app = express();
 
 app.use(bodyParser.json());
+
+app.use(cors());
+app.options('*', cors());
 
 app.post('/api/sendEmailOrderReceived', (req, res) => {
   sendEmailOrderReceivedTo(req.body.email);
