@@ -21,12 +21,12 @@ function sendEmail(message) {
   });
 }
 
-function sendEmailOrderReceivedTo(recipientAddress) {
+function sendEmailOrderSentTo(recipientAddress) {
   const message = {
     from: SENDER_ADDRESS,
     to: recipientAddress,
     subject: 'Objednávka byla odeslána',
-    text: 'Plaintext version of the message',
+    text: 'Vase objednvka byla odeslana blablabla',
     html: '<p>HTML version of the message</p>',
   };
   sendEmail(message);
@@ -37,10 +37,13 @@ function sendEmailOrderConfirmedTo(recipientAddress) {
     from: SENDER_ADDRESS,
     to: recipientAddress,
     subject: 'Objednávka byla potvrzena',
-    text: 'Plaintext version of the message',
+    text: 'Vase objednvka byla potvrzena blablabla',
     html: '<p>HTML version of the message</p>',
   };
   sendEmail(message);
 }
 
-module.exports = { sendEmailOrderReceivedTo, sendEmailOrderConfirmedTo };
+module.exports = {
+  sendEmailOrderSentTo,
+  sendEmailOrderConfirmedTo,
+};

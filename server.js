@@ -3,7 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const {
-  sendEmailOrderReceivedTo,
+  sendEmailOrderSentTo,
   sendEmailOrderConfirmedTo,
 } = require('./models/emailSender');
 
@@ -14,14 +14,14 @@ app.use(bodyParser.json());
 app.use(cors());
 app.options('*', cors());
 
-app.post('/api/sendEmailOrderReceived', (req, res) => {
-  sendEmailOrderReceivedTo(req.body.email);
-  res.send('');
+app.post('/api/sendEmailOrderSent', (req, res) => {
+  sendEmailOrderSentTo(req.body.email);
+  res.send(req.body.order);
 });
 
 app.post('/api/sendEmailOrderConfirmed', (req, res) => {
   sendEmailOrderConfirmedTo(req.body.email);
-  res.send('');
+  res.send(req.body.order);
 });
 
 app.listen(process.env.PORT || 3000, () =>
