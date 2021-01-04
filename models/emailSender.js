@@ -3,12 +3,12 @@ const nodemailer = require('nodemailer');
 const SENDER_ADDRESS = 'test@skladovypomocnik.cz';
 
 let transporter = nodemailer.createTransport({
-  host: 'wes1-smtp.wedos.net',
-  port: 587,
+  host: process.env.EMAIL_HOST,
+  port: process.env.EMAIL_PORT,
   secure: false, // upgrade later with STARTTLS
   auth: {
-    user: 'test@skladovypomocnik.cz',
-    pass: 'Wedosemail1+',
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASSWORD,
   },
 });
 
