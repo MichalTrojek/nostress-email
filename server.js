@@ -1,8 +1,15 @@
 const express = require('express');
-const app = express();
+const bodyParser = require('body-parser');
 
-app.get('/', async (request, response) => {
-  response.send();
+const app = express();
+app.use(bodyParser.json());
+
+app.post('/api/sendEmailOrderReceived', (req, res) => {});
+
+app.post('/api/sendEmailConfirmed', (request, response) => {
+  console.log(request.body);
+
+  response.send('done');
 });
 
 app.listen(process.env.PORT || 3000, () =>
