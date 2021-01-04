@@ -1,15 +1,20 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-
+const {
+  sendEmailOrderReceivedTo,
+  sendEmailOrderConfirmedTo,
+} = require('./models/emailSender');
 const app = express();
 app.use(bodyParser.json());
 
-app.post('/api/sendEmailOrderReceived', (req, res) => {});
+app.post('/api/sendEmailOrderReceived', (req, res) => {
+  sendEmailOrderReceivedTo(req.body.email);
+  res.send('');
+});
 
-app.post('/api/sendEmailConfirmed', (request, response) => {
-  console.log(request.body);
-
-  response.send('done');
+app.post('/api/sendEmailConfirmed', (req, res) => {
+  sendEmailOrderConfirmedTo(req.body.email);
+  res.send('');
 });
 
 app.listen(process.env.PORT || 3000, () =>
