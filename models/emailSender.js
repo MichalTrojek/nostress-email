@@ -17,30 +17,52 @@ function sendEmail(message) {
     if (err) {
       console.log(`Error while sending an email: ${err}`);
     }
-    console.log('info ', info);
+    // console.log('info ', info);
   });
 }
 
-function sendEmailOrderSentTo(recipientAddress) {
+function sendEmailOrderSentTo(recipientAddress, order) {
+  const outputHtml = `
+    <h1>Vaše objednávka číslo ${order.orderNumber} byla odeslána</h1>
+  `;
   const message = {
     from: SENDER_ADDRESS,
     to: recipientAddress,
     subject: 'Objednávka byla odeslána',
     text: 'Vase objednvka byla odeslana blablabla',
-    html: '<p>HTML version of the message</p>',
+    html: outputHtml,
   };
   sendEmail(message);
 }
 
-function sendEmailOrderConfirmedTo(recipientAddress) {
+function sendEmailOrderConfirmedTo(recipientAddress, order) {
+  console.log(order);
+  const outputHtml = `
+  <h1>Vaše objednávka číslo ${order.orderNumber} byla potvrzena</h1>
+  <h2>Sourh</h2>
+  <p>Jméno: ${order.name}</p>
+  <p>Telefonní číslo:  ${order.phoneNumber}</p>
+  <p>Způsob dopravy: ${
+    order.orderMethod === 'DELIVERY' ? 'Rozvoz' : 'Osobní vyzvednutí'
+  }</p>
+  <p>Číslo objednávky: ${order.orderNumber}</p>
+  <h2>Objednané položky</h2>
+ 
+`;
   const message = {
     from: SENDER_ADDRESS,
     to: recipientAddress,
     subject: 'Objednávka byla potvrzena',
     text: 'Vase objednvka byla potvrzena blablabla',
-    html: '<p>HTML version of the message</p>',
+    html: outputHtml,
   };
   sendEmail(message);
+}
+
+function renderItems(items) {
+  return items.map((item) => {
+    return `<p>${item.amount}x  ${item.name} ${item.price},- KČ/kus</p>`;
+  });
 }
 
 module.exports = {

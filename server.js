@@ -15,12 +15,12 @@ app.use(cors());
 app.options('*', cors());
 
 app.post('/api/sendEmailOrderSent', (req, res) => {
-  sendEmailOrderSentTo(req.body.email);
+  sendEmailOrderSentTo(req.body.email, JSON.parse(req.body.order));
   res.send(req.body.order);
 });
 
 app.post('/api/sendEmailOrderConfirmed', (req, res) => {
-  sendEmailOrderConfirmedTo(req.body.email);
+  sendEmailOrderConfirmedTo(req.body.email, JSON.parse(req.body.order));
   res.send(req.body.order);
 });
 
