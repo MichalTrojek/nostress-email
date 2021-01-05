@@ -23,7 +23,16 @@ function sendEmail(message) {
 
 function sendEmailOrderSentTo(recipientAddress, order) {
   const outputHtml = `
-    <h1>Vaše objednávka číslo ${order.orderNumber} byla odeslána</h1>
+    <h1>Vaše objednávka byla odeslána</h1>
+    <h2>Sourh</h2>
+    <p>Jméno: ${order.name}</p>
+    <p>Telefonní číslo:  ${order.phoneNumber}</p>
+    <p>Způsob dopravy: ${
+      order.orderMethod === 'DELIVERY' ? 'Rozvoz' : 'Osobní vyzvednutí'
+    }</p>
+    <p>Celková cena: ${order.totalPrice} ,- Kč</p>
+    <h2>Objednané položky</h2>
+    ${renderItems(order.items)}
   `;
   const message = {
     from: SENDER_ADDRESS,
@@ -36,9 +45,8 @@ function sendEmailOrderSentTo(recipientAddress, order) {
 }
 
 function sendEmailOrderConfirmedTo(recipientAddress, order) {
-  console.log(order);
   const outputHtml = `
-  <h1>Vaše objednávka číslo ${order.orderNumber} byla potvrzena</h1>
+  <h1>Vaše objednávka s číslem ${order.orderNumber} byla potvrzena</h1>
   <h2>Sourh</h2>
   <p>Jméno: ${order.name}</p>
   <p>Telefonní číslo:  ${order.phoneNumber}</p>
@@ -46,8 +54,9 @@ function sendEmailOrderConfirmedTo(recipientAddress, order) {
     order.orderMethod === 'DELIVERY' ? 'Rozvoz' : 'Osobní vyzvednutí'
   }</p>
   <p>Číslo objednávky: ${order.orderNumber}</p>
+  <p>Celková cena: ${order.totalPrice} ,- Kč</p>
   <h2>Objednané položky</h2>
- 
+  ${renderItems(order.items)}
 `;
   const message = {
     from: SENDER_ADDRESS,
@@ -61,7 +70,7 @@ function sendEmailOrderConfirmedTo(recipientAddress, order) {
 
 function renderItems(items) {
   return items.map((item) => {
-    return `<p>${item.amount}x  ${item.name} ${item.price},- KČ/kus</p>`;
+    return `<p> ${item.amount}x  ${item.name} ${item.price},- Kč</p>`;
   });
 }
 
