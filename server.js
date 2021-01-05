@@ -14,6 +14,10 @@ app.use(bodyParser.json());
 app.use(cors());
 app.options('*', cors());
 
+app.get('/', (req, res) => {
+  res.send('test');
+});
+
 app.post('/api/sendEmailOrderSent', (req, res) => {
   sendEmailOrderSentTo(req.body.email, JSON.parse(req.body.order));
   res.send(req.body.order);
