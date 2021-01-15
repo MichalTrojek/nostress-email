@@ -109,7 +109,7 @@ function sendOrderFinishedEmailTo(recipientAddress, order) {
   };
   setTimeout(() => {
     sendEmail(message);
-  }, 36000000);
+  }, 1800000);
 }
 
 module.exports = {
