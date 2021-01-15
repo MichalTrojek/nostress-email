@@ -6,6 +6,7 @@ const cors = require('cors');
 const {
   sendEmailOrderSentTo,
   sendEmailOrderConfirmedTo,
+  sendOrderFinishedEmailTo,
 } = require('./models/emailSender');
 
 const app = express();
@@ -26,6 +27,11 @@ app.post('/api/sendEmailOrderSent', (req, res) => {
 
 app.post('/api/sendEmailOrderConfirmed', (req, res) => {
   sendEmailOrderConfirmedTo(req.body.email, JSON.parse(req.body.order));
+  res.send(req.body.order);
+});
+
+app.post('/api/sendOrderFinishedEmail', (req, res) => {
+  sendOrderFinishedEmailTo(req.body.email, JSON.parse(req.body.order));
   res.send(req.body.order);
 });
 
