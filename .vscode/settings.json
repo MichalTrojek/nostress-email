@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.deploySubpath": ".",
+    "appService.defaultWebAppToDeploy": "/subscriptions/3999fc48-f392-44a8-836d-bab2c8b74682/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/nostress-email-sender"
+}

@@ -17,7 +17,7 @@ app.use(cors());
 app.options('*', cors());
 
 app.get('/', (req, res) => {
-  res.send('test');
+  res.send('test2');
 });
 
 app.post('/api/sendEmailOrderSent', (req, res) => {
@@ -35,6 +35,7 @@ app.post('/api/sendOrderFinishedEmail', (req, res) => {
   res.send(req.body.order);
 });
 
-app.listen(process.env.PORT || 3000, () =>
-  console.log('app is available on localhost 3000')
+const PORT = 3000;
+app.listen(process.env.PORT || PORT, () =>
+  console.log(`server is running at port ${PORT}`)
 );
