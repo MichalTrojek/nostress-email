@@ -107,9 +107,8 @@ function sendOrderFinishedEmailTo(recipientAddress, order) {
     `,
     html: outputHtml,
   };
-  setTimeout(() => {
-    sendEmail(message);
-  }, 2600000);
+
+  sendEmail(message);
 }
 
 module.exports = {

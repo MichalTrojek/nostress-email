@@ -31,7 +31,11 @@ app.post('/api/sendEmailOrderConfirmed', (req, res) => {
 });
 
 app.post('/api/sendOrderFinishedEmail', (req, res) => {
-  sendOrderFinishedEmailTo(req.body.email, JSON.parse(req.body.order));
+  const minutes = 25;
+  const delay = 60 * 1000 * minutes;
+  setTimeout(() => {
+    sendOrderFinishedEmailTo(req.body.email, JSON.parse(req.body.order));
+  }, delay);
   res.send(req.body.order);
 });
 
