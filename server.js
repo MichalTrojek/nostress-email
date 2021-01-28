@@ -31,20 +31,15 @@ app.post('/api/sendEmailOrderConfirmed', (req, res) => {
 });
 
 app.post('/api/sendOrderFinishedEmail', (req, res) => {
-  const minutes = 25;
+  const minutes = 5;
   const delay = 60 * 1000 * minutes;
-  const isFinished = false;
+
   setTimeout(() => {
     sendOrderFinishedEmailTo(req.body.email, JSON.parse(req.body.order));
     isFinished = true;
   }, delay);
 
-  while (true) {
-    if (isFinished) {
-      res.send(req.body.order);
-      break;
-    }
-  }
+  res.send(req.body.order);
 });
 
 const PORT = 3000;
