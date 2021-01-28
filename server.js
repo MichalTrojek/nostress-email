@@ -36,7 +36,6 @@ app.post('/api/sendOrderFinishedEmail', (req, res) => {
 
   setTimeout(() => {
     sendOrderFinishedEmailTo(req.body.email, JSON.parse(req.body.order));
-    isFinished = true;
   }, delay);
 
   res.send(req.body.order);
