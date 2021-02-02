@@ -3,13 +3,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-const { db, auth, timeStamp } = require('./firebase');
-
 const {
   sendEmailOrderSentTo,
   sendEmailOrderConfirmedTo,
-  sendOrderFinishedEmailTo,
-} = require('./models/emailSender');
+} = require('./utils/emailSender');
 
 const app = express();
 
@@ -36,27 +33,23 @@ app.post('/api/sendOrderFinishedEmail', (req, res) => {
   // const minutes = 5;
   // const delay = 60 * 1000 * minutes;
 
-  // setTimeout(() => {
-  //   sendOrderFinishedEmailTo(req.body.email, JSON.parse(req.body.order));
-  // }, delay);
-
-  db.collection('pendingEmails')
-    .get()
-    .then(function (querySnapshot) {
-      querySnapshot.forEach(function (doc) {
-        console.log(doc.id);
-        const secondsSinceEpoch = Math.round(Date.now() / 1000);
-        const timeDiff = secondsSinceEpoch - doc.data().created.seconds;
-        console.log(timeDiff);
-        if (timeDiff > 3600) {
-          // 3600 = 1hr in seconds
-          console.log('send!');
-          sendOrderFinishedEmailTo(doc.data().email, doc.data().order);
-        } else {
-          console.log('Dont send!');
-        }
-      });
-    });
+  // db.collection('pendingEmails')
+  //   .get()
+  //   .then(function (querySnapshot) {
+  //     querySnapshot.forEach(function (doc) {
+  //       console.log(doc.id);
+  //       const secondsSinceEpoch = Math.round(Date.now() / 1000);
+  //       const timeDiff = secondsSinceEpoch - doc.data().created.seconds;
+  //       console.log(timeDiff);
+  //       if (timeDiff > 3600) {
+  //         // 3600 = 1hr in seconds
+  //         console.log('send!');
+  //         sendOrderFinishedEmailTo(doc.data().email, doc.data().order);
+  //       } else {
+  //         console.log('Dont send!');
+  //       }
+  //     });
+  //   });
 
   res.send(req.body.order);
 });
