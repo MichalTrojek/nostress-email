@@ -1,5 +1,5 @@
 const { db } = require('../firebase');
-import {sendOrderFinishedEmailTo} = require('../utils/emailSender');
+const { sendOrderFinishedEmailTo } = require('../utils/emailSender');
 const sendPendingEmails = () => {
   db.collection('pendingEmails')
     .get()
