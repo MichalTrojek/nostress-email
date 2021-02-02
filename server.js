@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const { sendPendingEmails } = require('./api/sendPendingEmails');
+const schedule = require('node-schedule');
 
 const {
   sendEmailOrderSentTo,
@@ -16,6 +17,11 @@ app.use(bodyParser.json());
 
 app.use(cors());
 app.options('*', cors());
+
+schedule.scheduleJob('0 9-21 * * *', function () {
+  console.log('checked emails!');
+  sendPendingEmails();
+});
 
 app.get('/', (req, res) => {
   res.send('test2');
