@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 
-const SENDER_ADDRESS = 'test@skladovypomocnik.cz';
+const SENDER_ADDRESS = process.env.EMAIL_SENDER;
 
 let transporter = nodemailer.createTransport({
   host: process.env.EMAIL_HOST,
