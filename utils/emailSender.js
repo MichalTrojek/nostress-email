@@ -28,7 +28,7 @@ function sendEmailOrderSentTo(recipientAddress, order) {
   const outputHtml = `
     <h1>Vaše objednávka byla odeslána</h1>
     <h2>Sourh</h2>
-    <p>Jméno: ${order.name}</p>
+    <p>Jméno: ${order.name} ${order.surname}</p>
     <p>Telefonní číslo:  ${order.phoneNumber}</p>
     <p>Způsob dopravy: ${
       order.orderMethod === 'DELIVERY' ? 'Rozvoz' : 'Osobní vyzvednutí'
@@ -58,7 +58,7 @@ function sendEmailOrderConfirmedTo(recipientAddress, order) {
     order.orderNumber
   }</h1>
   <h2>Sourh</h2>
-  <p>Jméno: ${order.name}</p>
+  <p>Jméno: ${order.name} ${order.surname}</p>
   <p>Telefonní číslo:  ${order.phoneNumber}</p>
   <p>Způsob dopravy: ${
     order.orderMethod === 'DELIVERY' ? 'Rozvoz' : 'Osobní vyzvednutí'
@@ -84,7 +84,7 @@ function sendOrderFinishedEmailTo(recipientAddress, order) {
   nedávno jste si od nás objednal/a jídlo.</br> 
   Děláme vše, co je v našich silách, abychom vám nabídli co nejlepší službu. A vaše hodnocení nám v tom hodně pomůže! </p>
   <h2>Sourh</h2>
-  <p>Jméno: ${order.name}</p>
+  <p>Jméno: ${order.name} ${order.surname}</p>
   <p>Telefonní číslo:  ${order.phoneNumber}</p>
   <p>Způsob dopravy: ${
     order.orderMethod === 'DELIVERY' ? 'Rozvoz' : 'Osobní vyzvednutí'
